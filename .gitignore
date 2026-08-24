@@ -11,7 +11,7 @@ venv/
 .venv/
 env/
 
-*.egg-info/
+src/*.egg-info/
 
 .worktrees/
 worktrees/

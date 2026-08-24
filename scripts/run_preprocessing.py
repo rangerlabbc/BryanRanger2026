@@ -1,6 +1,6 @@
 import yaml
 from pathlib import Path
-from maternal_preprocessing.preprocessing import process_non_abd, process_abd, crop_contact_images
+from maternal_ultrasound.preprocessing import process_non_abd, process_abd, crop_contact_images
 
 # load config
 with open("configs/paths.yaml") as f:
