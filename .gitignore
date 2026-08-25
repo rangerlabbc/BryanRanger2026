@@ -17,13 +17,10 @@ src/*.egg-info/
 worktrees/
 local-configs/
 
-data/
-# data/cropped_images/
-# data/splits/*
-# !data/splits/*.dvc
-# data/*.csv
-# data/*.xlsx
-# data/*.xls
+# Data — real files ignored, only .dvc pointers tracked
+data/raw/
+data/processed/
+data/test/
 
 past-papers/
 
