@@ -1,0 +1,46 @@
+__pycache__/
+*.py[cod]
+*.pyo
+
+.pytest_cache/
+.pytest_tmp/
+.mypy_cache/
+.ruff_cache/
+
+venv/
+.venv/
+env/
+
+src/*.egg-info/
+
+.worktrees/
+worktrees/
+local-configs/
+
+# Data — real files ignored, only .dvc pointers tracked
+data/raw/
+data/processed/
+data/test/
+
+past-papers/
+
+artifacts/
+# artifacts/checkpoints/
+# artifacts/results/
+# artifacts/**/*.pt
+# artifacts/**/*.pth
+# artifacts/**/*.pkl
+# artifacts/**/*.csv
+# artifacts/**/*.png
+# artifacts/**/*.jpg
+# artifacts/**/*.jpeg
+
+##add dvc ignore files
+.dvc/config.local
+
+.DS_Store
+Thumbs.db
+
+# *.pt
+# *.pth
+# *.pkl

@@ -1,0 +1,4 @@
+[core]
+    remote = selene
+['remote "selene"']
+    url = /Volumes/Engineering/RangerLab/dvc-storage

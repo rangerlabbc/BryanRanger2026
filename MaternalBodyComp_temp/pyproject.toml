@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "maternal-ultrasound"
+version = "0.1.0"
+description = "Preprocessing pipeline for maternal ultrasound images"
+requires-python = ">=3.10"
+
+# Core dependencies — installed with: pip install -e "."
+dependencies = [
+    "opencv-python",
+    "numpy",
+    "pyyaml",
+    "pathlib",
+]
+
+# Optional dependency groups
+[project.optional-dependencies]
+data = [
+    "dvc[ssh]",
+]
+# Install with: pip install -e ".[data]"
+# Adds DVC for data version control with SSH server support
+
+# Install with: pip install -e ".[dev]"
+# Adds tools useful during development
+dev = [
+    "jupyter",
+    "ipywidgets",
+    "matplotlib",
+]
+
+# Install everything with: pip install -e ".[data,dev]"
+
+[tool.setuptools.packages.find]
+where = ["src"]
