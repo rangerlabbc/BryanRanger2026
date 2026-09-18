@@ -470,7 +470,7 @@ def crop_frame_contacts(frame, threshold=CONTENT_THRESHOLD):
 
 def crop_contact_images(source_base, threshold=CONTENT_THRESHOLD):
   """
-  Scans all non-abdomen images in source_base, detects and removes bad-contact regions. 
+  Scans all non-abdomen images in source_base (already cropped files), detects and removes bad-contact regions. 
   Overwrites the original files. 
   """
   source_path = Path(source_base)

@@ -1,4 +1,8 @@
-input_folder: /Volumes/Engineering/RangerLab/Maternal Project Data/Ultrasound Files
-output_folder: /Volumes/Engineering/RangerLab/Maternal Project Data/Cropped Ultrasound Files
+# input_folder: /Volumes/Engineering/RangerLab/Maternal Project Data/Ultrasound Files
+# output_folder: /Volumes/Engineering/RangerLab/Maternal Project Data/Cropped Ultrasound Files
 reference_image1: /Volumes/Engineering/RangerLab/Maternal Project Data/Cropped Ultrasound Files/NP008/NP008_Abd/capture_4_2026-01-13T17-25-17.jpeg
 reference_image2: /Volumes/Engineering/RangerLab/Maternal Project Data/Cropped Ultrasound Files/P034/T2/P034_Abd_T2/capture_6_2026-04-30T10-58-48.jpeg
+
+# Test file paths
+input_folder: /Volumes/Engineering/RangerLab/Maternal Project Data/Test Files/Files
+output_folder: /Volumes/Engineering/RangerLab/Maternal Project Data/Test Files/Cropped Files

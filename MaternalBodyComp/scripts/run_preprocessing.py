@@ -9,4 +9,4 @@ with open("configs/paths.yaml") as f:
 # run pipeline
 process_non_abd(config["input_folder"], config["output_folder"])
 process_abd(config["input_folder"], config["output_folder"], config["reference_image1"], config["reference_image2"])
-crop_contact_images(config["put_folder"])
+# crop_contact_images(config["output_folder"])
