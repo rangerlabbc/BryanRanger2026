@@ -71,8 +71,8 @@ def process_non_abd(source_base, target_base, cutoff_date=None):
   source_path = Path(source_base)
   target_path = Path(target_base)
 
-  if cutoff_date is None:
-    cutoff_date = datetime(2026, 6, 20)
+  # if cutoff_date is None:
+  #   cutoff_date = datetime(2026, 6, 20)
 
   # extensions we want to process
   IMAGE_EXTS = ('.jpeg', '.jpg')
@@ -92,8 +92,8 @@ def process_non_abd(source_base, target_base, cutoff_date=None):
         continue
 
       # skip old files
-      if datetime.fromtimestamp(file_path.stat().st_mtime) < cutoff_date:
-        continue
+      # if datetime.fromtimestamp(file_path.stat().st_mtime) < cutoff_date:
+      #   continue
 
       # create matching folder structure
       relative_path = file_path.relative_to(source_path)
@@ -297,8 +297,8 @@ def process_abd(source_base, target_base, reference_path1, reference_path2, cuto
   source_path = Path(source_base)
   target_path = Path(target_base)
 
-  if cutoff_date is None:
-    cutoff_date = datetime(2026, 7, 9)
+  # if cutoff_date is None:
+  #   cutoff_date = datetime(2026, 7, 9)
 
   # extensions we want to process
   IMAGE_EXTS = ('.jpeg', '.jpg')
@@ -330,8 +330,8 @@ def process_abd(source_base, target_base, reference_path1, reference_path2, cuto
         continue
 
       # skip old files
-      if datetime.fromtimestamp(file_path.stat().st_mtime) < cutoff_date:
-        continue
+      # if datetime.fromtimestamp(file_path.stat().st_mtime) < cutoff_date:
+      #   continue
 
       # create matching folder structure
       relative_path = file_path.relative_to(source_path)
