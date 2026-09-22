@@ -186,24 +186,12 @@ def is_blue_tinted(image):
   return (sat_mean > 20) # tune if needed
 
 
-def is_MSK(file_path):
+def is_MSK(file_path, msk_folders):
   """
   Returns True if the file is from an MSK folder (Ref3 type). Returns False otherwise (Ref2 type).
   Add folder names to MSK_FOLDERS list as needed. 
   """
-  MSK_FOLDERS = [
-  'NP015_Abd',
-  'P001_Abd_T1',
-  'P005_Abd_T1',
-  'P006_Abd_T1',
-  'P054_Abd_T2',
-  'P055_Abd_T2',
-  'P059_Abd_T2',
-  'P060_Abd_T2',
-  'P062_Abd_T2',
-  # add more as needed
-  ]
-  return file_path.parent.name in MSK_FOLDERS
+  return file_path.parent.name in msk_folders
 
 
 def get_logo_coords(image):
@@ -289,7 +277,7 @@ def process_abd_frame(frame, fan_mask, x, y, bw, bh, logo_coords):
   return result[y:y+bh, x:x+bw]
 
 
-def process_abd(source_base, target_base, reference_path1, reference_path2, cutoff_date=None):
+def process_abd(source_base, target_base, reference_path1, reference_path2, msk_folders):
   """
   Crops all abdomen images and videos in source_base and save them to a matching folder structure in target_base.
   Skips hidden files, abdomen files, and files older than the cutoff date. 
@@ -358,7 +346,7 @@ def process_abd(source_base, target_base, reference_path1, reference_path2, cuto
           # route to the correct mask based on tint or MSK scan
           if is_blue_tinted(image):
             fan_mask, fx, fy, fbw, fbh = fan_mask1, fx1, fy1, fbw1, fbh1
-          elif is_MSK(file_path):
+          elif is_MSK(file_path, msk_folders):
             # use the first image in this MSK folder as the reference for the fan mask
             if reference_path3 is not None and file_path.parent.name == reference_path3.parent.name:
               fan_mask, fx, fy, fbw, fbh = fan_mask3, fx3, fy3, fbw3, fbh3
@@ -399,11 +387,21 @@ def process_abd(source_base, target_base, reference_path1, reference_path2, cuto
           # route to the correct mask based on tint or MSK scan
           if is_blue_tinted(first_frame):
             fan_mask, fx, fy, fbw, fbh = fan_mask1, fx1, fy1, fbw1, fbh1
-          elif is_MSK(file_path):
+          elif is_MSK(file_path, msk_folders):
             if reference_path3 is not None and file_path.parent.name == reference_path3.parent.name:
               fan_mask, fx, fy, fbw, fbh = fan_mask3, fx3, fy3, fbw3, fbh3
             else:
-              reference_path3 = file_path
+              # current file is a video, find first image in this folder to use as reference
+              folder = file_path.parent
+              reference_path3 = None
+              for f in sorted(folder.iterdir()):
+                if f.suffix.lower() in IMAGE_EXTS and not f.name.startswith('.'):
+                  reference_path3 = f
+                  break
+              if reference_path3 is None:
+                print(f"Skipped (no reference image found in MSK folder {folder.name}): {relative_path}")
+                cap.release()
+                continue
               fan_mask3, fx3, fy3, fbw3, fbh3 = compute_fan_mask(reference_path3)
               fan_mask, fx, fy, fbw, fbh = fan_mask3, fx3, fy3, fbw3, fbh3
           else:

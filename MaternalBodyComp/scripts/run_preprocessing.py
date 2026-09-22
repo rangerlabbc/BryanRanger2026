@@ -8,5 +8,5 @@ with open("configs/paths.yaml") as f:
 
 # run pipeline
 process_non_abd(config["input_folder"], config["output_folder"])
-process_abd(config["input_folder"], config["output_folder"], config["reference_image1"], config["reference_image2"])
+process_abd(config["input_folder"], config["output_folder"], config["reference_image1"], config["reference_image2"], config["msk_folders"])
 # crop_contact_images(config["output_folder"])
