@@ -1,0 +1,40 @@
+seed: 42
+
+data:
+  processed_dir: data/processed          # local copy of cropped images
+  labels_csv: data/labels.csv            # CSV with Study_ID, FM, FFM, Weight_visit, Length_visit
+
+  region_combo: BQS                      # B=Bicep Q=Quad S=Scap (no Abd yet)
+  num_images: 2                          # images per region per timepoint
+  output: FM                             # FM or FFM
+  train_fraction: 0.9                    # 90% train, 10% val
+
+  # Bottom-crop fractions per region (1.0 = no crop)
+  # Order: [Bicep, Quad, Scap, Abd]
+  crop: [1.0, 1.0, 1.0, 1.0]
+
+  # Denoising (off by default for first run)
+  speckle: false
+  despeckle: false
+  augment: 0                             # 0=none, 5=5x augmentation
+
+model:
+  input_channels: 3
+  output_dim: 1
+  bilinear: true
+  # n_images must equal: num_images × len(region_combo) × num_timepoints_loaded
+  # For 2 images × 3 regions (BQS) with patients having 1 timepoint: 6
+  # If your patients have multiple timepoints and all load, increase this.
+  # Start with 6 and adjust based on the error message if it fails.
+  n_images: 6
+
+training:
+  epochs: 90
+  criterion: Custom                      # MSE, MAE, MAPE, Custom
+  learning_rate: 0.001
+  adaptive_lr: true
+  scheduler_gamma: 0.95
+
+artifacts:
+  checkpoint_dir: artifacts/checkpoints
+  results_dir: artifacts/results
