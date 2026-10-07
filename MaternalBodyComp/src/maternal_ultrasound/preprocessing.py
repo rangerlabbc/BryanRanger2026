@@ -84,7 +84,7 @@ def process_non_abd(source_base, target_base, cutoff_date=None):
       ext = file_path.suffix.lower()
 
       # skip hidden files
-      if file.startswith('.'):
+      if file.startswith(('.','EXCLUDE_')):
         continue
 
       # skip abd files
@@ -310,7 +310,7 @@ def process_abd(source_base, target_base, reference_path1, reference_path2, msk_
       ext = file_path.suffix.lower()
 
       # skip hidden files
-      if file.startswith('.'):
+      if file.startswith(('.','EXCLUDE_')):
         continue
 
       # skip non abd files
